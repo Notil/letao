@@ -5,7 +5,7 @@
 if(location.href.indexOf("login.html")=== -1){
   $.ajax({
     type:"get",
-    url:" /employee/employeeLogout",
+    url:" /employee/checkRootLogin",
     dataType:'json',
     success:function ( info ) {
         if(info.error === 400){
@@ -44,5 +44,16 @@ $('.icon_logout').click(function () {
 })
 
 $('#logoutBtn').click(function () {
-    location.href = "login.html";
+  $.ajax({
+    type: "get",
+    url: "/employee/employeeLogout",
+    dataType: "json",
+    success: function( info ) {
+      console.log( info )
+      if ( info.success ) {
+        // 跳转到登录页面
+        location.href = "login.html";
+      }
+    }
+  })
 })
